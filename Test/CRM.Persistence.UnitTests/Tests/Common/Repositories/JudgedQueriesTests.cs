@@ -17,11 +17,11 @@ public class JudgedQueriesFixture
 
     public JudgedQueriesFixture()
     {
-        DummyEntities = new List<DummyEntity>
-            {
-                new DummyEntity(),
-                new DummyEntity()
-            };
+        DummyEntities =
+            [
+                new (),
+                new ()
+            ];
 
         Mock<DbSet<DummyEntity>> dummyDbSetMock = DummyEntities.AsQueryable().BuildMockDbSet();
         DummyDbSet = dummyDbSetMock.Object;
@@ -77,7 +77,7 @@ public class JudgedQueriesTests : IClassFixture<JudgedQueriesFixture>
         // Arrange
         IQueryable<DummyEntity> securedQueryable = new List<DummyEntity>
         {
-            new DummyEntity()
+            new ()
         }.AsQueryable();
 
         var identityMock = new Mock<IIdentityInfo>();
