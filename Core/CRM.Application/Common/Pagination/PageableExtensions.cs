@@ -80,9 +80,13 @@ public static class PageableExtensions
         ArgumentException.ThrowIfNullOrWhiteSpace(request.OrderBy, nameof(request.OrderBy));
 
         if (request.OrderDirection == OrderDirectionEnum.Ascending)
+        {
             return await query.OrderBy(request.OrderBy).ToPageableListAsync(request, cancellationToken);
+        }
         else
+        {
             return await query.OrderByDescending(request.OrderBy).ToPageableListAsync(request, cancellationToken);
+        }
     }
 
     /// <summary>
@@ -113,14 +117,20 @@ public static class PageableExtensions
         CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(request.OrderBy))
+        {
             return await query.ToPageableListAsync(request, cancellationToken);
+        }
 
         ArgumentNullException.ThrowIfNull(orderKeySelector, nameof(orderKeySelector));
 
         if (request.OrderDirection == OrderDirectionEnum.Ascending)
+        {
             return await query.OrderBy(orderKeySelector).ToPageableListAsync(request, cancellationToken);
+        }
         else
+        {
             return await query.OrderByDescending(orderKeySelector).ToPageableListAsync(request, cancellationToken);
+        }
     }
 
     /// <summary>
@@ -161,9 +171,9 @@ public static class PageableExtensions
     /// </returns>
     private static Expression<Func<T, object>> ToLambda<T>(string propertyName)
     {
-        var parameter = Expression.Parameter(typeof(T));
-        var property = Expression.Property(parameter, propertyName);
-        var propAsObject = Expression.Convert(property, typeof(object));
+        ParameterExpression? parameter = Expression.Parameter(typeof(T));
+        MemberExpression? property = Expression.Property(parameter, propertyName);
+        UnaryExpression? propAsObject = Expression.Convert(property, typeof(object));
 
         return Expression.Lambda<Func<T, object>>(propAsObject, parameter);
     }
