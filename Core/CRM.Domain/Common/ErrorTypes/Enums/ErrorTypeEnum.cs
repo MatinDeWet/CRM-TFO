@@ -1,4 +1,4 @@
-﻿namespace CRM.Application.Common.ErrorTypes.Enums;
+﻿namespace CRM.Domain.Common.ErrorTypes.Enums;
 public enum ErrorTypeEnum
 {
     Failure = 0,

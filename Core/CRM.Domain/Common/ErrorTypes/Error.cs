@@ -1,6 +1,6 @@
-﻿using CRM.Application.Common.ErrorTypes.Enums;
+﻿using CRM.Domain.Common.ErrorTypes.Enums;
 
-namespace CRM.Application.Common.ErrorTypes;
+namespace CRM.Domain.Common.ErrorTypes;
 public record Error
 {
     public static readonly Error None = new(string.Empty, string.Empty, ErrorTypeEnum.Failure);

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using CRM.Application.Common.ErrorTypes;
+using CRM.Domain.Common.ErrorTypes;
 
-namespace CRM.Application.Common.ResultTypes;
+namespace CRM.Domain.Common.ResultTypes;
 public class Result
 {
     public Result(bool isSuccess, Error error)

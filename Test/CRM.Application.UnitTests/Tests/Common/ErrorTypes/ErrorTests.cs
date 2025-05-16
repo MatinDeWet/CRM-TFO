@@ -1,5 +1,5 @@
-﻿using CRM.Application.Common.ErrorTypes;
-using CRM.Application.Common.ErrorTypes.Enums;
+﻿using CRM.Domain.Common.ErrorTypes;
+using CRM.Domain.Common.ErrorTypes.Enums;
 using Shouldly;
 
 namespace CRM.Application.UnitTests.Tests.Common.ErrorTypes;

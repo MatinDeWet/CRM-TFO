@@ -1,4 +1,4 @@
-﻿namespace RabbitLabsCRM.Application.Common.Repositories;
+﻿namespace CRM.Application.Common.Repositories;
 
 public interface ISecureCommand
 {

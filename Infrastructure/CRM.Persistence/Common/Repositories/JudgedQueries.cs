@@ -1,7 +1,7 @@
-﻿using CRM.Application.Common.Security.Contracts;
+﻿using CRM.Application.Common.Repositories;
+using CRM.Application.Common.Security.Contracts;
 using CRM.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using RabbitLabsCRM.Application.Common.Repositories;
 
 namespace CRM.Persistence.Common.Repositories;
 public class JudgedQueries<TCtx> : ISecureQuery where TCtx : DbContext
