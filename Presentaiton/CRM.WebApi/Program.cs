@@ -1,7 +1,10 @@
 using System.Reflection;
+using CRM.Application;
 using CRM.Persistence;
 using CRM.Persistence.Data.Context;
-using CRM.WebApi.Common.MiddleWares;
+using CRM.WebApi.Common.Filters;
+using FastEndpoints;
+using FastEndpoints.Swagger;
 using Microsoft.EntityFrameworkCore;
 
 public class Program
@@ -10,9 +13,12 @@ public class Program
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+        builder.Services
+            .AddFastEndpoints()
+            .SwaggerDocument();
 
-        builder.Services.AddControllers();
-        builder.Services.AddOpenApi();
+        builder.Services.AddDataIdentity();
+        builder.Services.AddApplicationMessaging();
 
         builder.Services
             .AddDbContext<CrmContext>(options =>
@@ -33,22 +39,15 @@ public class Program
 
         WebApplication app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.MapOpenApi();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-
-        app.MapControllers();
-
-        app.UseMiddleware<UserIdentifierMiddleware>();
+        app.UseDefaultExceptionHandler()
+            .UseFastEndpoints(c => c.Endpoints.Configurator = 
+            ep => ep.Options(b => b.AddEndpointFilter<UserIdentifierFilter>())
+            )
+        .UseSwaggerGen();
 
         if (builder.Environment.IsDevelopment())
         {
-            ApplyDbMigrations(app);
+            //ApplyDbMigrations(app);
         }
 
         app.Run();
